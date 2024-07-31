@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Verdana:wght@400;700&display=swap');
+
 body {
-    font-family: Verdana, sans-serif;
+    font-family: 'Verdana', sans-serif;
     background-color: #000000;
     color: white;
     margin: 0;
@@ -8,6 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 
 #container {
@@ -18,6 +21,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     padding: 20px;
+    animation: fadeIn 1s ease-in-out;
 }
 
 header {
@@ -26,11 +30,13 @@ header {
     background-color: #70b4fc;
     color: #272b26;
     border-radius: 8px 8px 0 0;
+    animation: slideInDown 1s ease-in-out;
 }
 
 main {
     padding: 20px;
     text-align: center;
+    animation: slideInUp 1s ease-in-out;
 }
 
 #game-container {
@@ -42,6 +48,11 @@ main {
     height: auto;
     border-radius: 8px;
     margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+#flag-image:hover {
+    transform: scale(1.05);
 }
 
 form {
@@ -52,6 +63,12 @@ label {
     display: block;
     margin-bottom: 10px;
     font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+label:hover {
+    color: #007bff;
 }
 
 input[type="text"], button {
@@ -62,6 +79,18 @@ input[type="text"], button {
     margin-right: 10px;
     background-color: #ffffff;
     color: #000000;
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+input[type="text"] {
+    width: 70%;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+    box-shadow: 0 0 5px #007bff;
+    border: 1px solid #007bff;
 }
 
 button {
@@ -75,10 +104,94 @@ button {
 button:hover {
     background-color: #007bff;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
 }
 
 #result {
     font-size: 1.2em;
     margin-top: 20px;
+    animation: fadeIn 1s ease-in-out;
 }
 
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #70b4fc;
+    color: #272b26;
+    border-radius: 0 0 8px 8px;
+    margin-top: 20px;
+    animation: slideInUp 1s ease-in-out;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+    from { transform: translateY(-100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInUp {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+input[type="text"]:focus::placeholder {
+    color: #007bff;
+}
+
+input[type="text"]:hover {
+    border: 1px solid #aaa;
+}
+
+#container::before {
+    content: "";
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    background-color: #007bff;
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: moveAround 5s infinite linear;
+}
+
+#container::after {
+    content: "";
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 100px;
+    height: 100px;
+    background-color: #007bff;
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: moveAround 5s infinite linear reverse;
+}
+
+@keyframes moveAround {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(20px, -20px); }
+    50% { transform: translate(40px, 0); }
+    75% { transform: translate(20px, 20px); }
+    100% { transform: translate(0, 0); }
+}
